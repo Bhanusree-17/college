@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Classroom Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">CC</div><div><strong>Classroom</strong><span>MANAGER</span></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" id="dashboardNav">▦ <span>Dashboard</span></button>
+      <div class="sidebar-note"><strong>Student records</strong><p>Manage your classroom details in one place.</p></div>
+      <div class="sidebar-footer"><span class="status-dot"></span> Classroom workspace</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><p class="eyebrow">CLASSROOM WORKSPACE</p><h1>Student Dashboard</h1></div>
+        <button class="primary-btn" id="addStudentBtn">＋ Add Student</button>
+      </header>
+
+      <section class="welcome-row">
+        <div><h2>Welcome back!</h2><p>Here's an overview of your student records.</p></div>
+        <div class="today-chip" id="todayLabel">Your classroom at a glance</div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Total Students</span><span class="stat-icon purple">♙</span></div><strong id="totalCount">0</strong><small>All student records</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Male Students</span><span class="stat-icon blue">♂</span></div><strong id="maleCount">0</strong><small>Records marked male</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Female Students</span><span class="stat-icon pink">♀</span></div><strong id="femaleCount">0</strong><small>Records marked female</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Departments</span><span class="stat-icon green">⌂</span></div><strong id="departmentCount">0</strong><small>Unique departments</small></article>
+      </section>
+
+      <section class="content-card">
+        <div class="section-heading"><div><h2>Student Records</h2><p>View, search, add, and update student information.</p></div><button class="outline-btn" id="refreshBtn">↻ Refresh</button></div>
+        <div class="filters">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search by name, roll number, email..."></label>
+          <select id="departmentFilter" aria-label="Filter by department"><option value="">All departments</option></select>
+          <select id="yearFilter" aria-label="Filter by year"><option value="">All years</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+        </div>
+        <div id="message" class="message hidden" role="status"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>STUDENT</th><th>ROLL NUMBER</th><th>DEPARTMENT</th><th>YEAR</th><th>EMAIL</th><th>ACTIONS</th></tr></thead>
+            <tbody id="studentTableBody"><tr><td colspan="6" class="empty-state">Loading student records...</td></tr></tbody>
+          </table>
+        </div>
+        <div class="table-footer"><span id="recordSummary">0 students</span><span>College Classroom Manager</span></div>
+      </section>
+      <footer class="page-footer">College Classroom Manager <span>•</span> Student information dashboard</footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="studentModal">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-heading"><div><p class="eyebrow">STUDENT INFORMATION</p><h2 id="modalTitle">Add Student</h2></div><button class="icon-btn" id="closeModalBtn" aria-label="Close">×</button></div>
+      <form id="studentForm">
+        <input type="hidden" id="studentId">
+        <div class="form-grid">
+          <label>Full name *<input id="name" name="name" required maxlength="100" placeholder="e.g. Ananya Sharma"></label>
+          <label>Roll number *<input id="rollNumber" name="rollNumber" required maxlength="30" placeholder="e.g. CSE2401"></label>
+          <label>Email *<input id="email" name="email" required type="email" maxlength="150" placeholder="student@college.edu"></label>
+          <label>Phone<input id="phone" name="phone" type="tel" maxlength="20" placeholder="Optional phone number"></label>
+          <label>Department *<select id="department" name="department" required><option value="">Select department</option><option>CSE</option><option>IT</option><option>ECE</option><option>EEE</option><option>Mechanical</option><option>Civil</option><option>Other</option></select></label>
+          <label>Year *<select id="year" name="year" required><option value="">Select year</option><option value="1">1st Year</option><option value="2">2nd Year</option><option value="3">3rd Year</option><option value="4">4th Year</option></select></label>
+          <label>Gender<select id="gender" name="gender"><option value="">Prefer not to say</option><option>Male</option><option>Female</option><option>Other</option></select></label>
+          <label>Section<input id="section" name="section" maxlength="10" placeholder="e.g. A"></label>
+        </div>
+        <div class="modal-actions"><button type="button" class="outline-btn" id="cancelBtn">Cancel</button><button type="submit" class="primary-btn" id="saveBtn">Save Student</button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal-backdrop hidden" id="viewModal">
+    <section class="modal view-modal" role="dialog" aria-modal="true" aria-labelledby="viewTitle">
+      <div class="modal-heading"><div><p class="eyebrow">STUDENT PROFILE</p><h2 id="viewTitle">Student Details</h2></div><button class="icon-btn" id="closeViewBtn" aria-label="Close">×</button></div>
+      <div id="studentDetails" class="details-grid"></div>
+      <div class="modal-actions"><button class="primary-btn" id="doneViewBtn">Done</button></div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
