@@ -1,6 +1,6 @@
 // For local development, keep this URL. After deploying the backend, replace it
 // with your backend's public URL followed by /api.
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://college-1cv6.onrender.com/api";
 
 const tableBody = document.getElementById("studentTableBody");
 const searchInput = document.getElementById("searchInput");
